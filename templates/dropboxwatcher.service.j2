@@ -1,0 +1,11 @@
+[Unit]
+Description=Dropbox Watcher
+After=network.target
+
+[Service]
+Type=simple
+User={{ seedbox_user }}
+ExecStart=/home/{{ seedbox_user }}/dropboxwatcher.py
+
+[Install]
+WantedBy=multi-user.target

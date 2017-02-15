@@ -1,0 +1,19 @@
+---
+- name: Installation du repository epel
+  yum:
+    name: epel-release
+    state: latest
+  tags:
+    - pkgs
+    - openvpn
+    - rtorrent
+
+- name: Installation des packages requis
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ seedbox_pkgs }}"
+  tags:
+    - pkgs
+    - openvpn
+    - rtorrent

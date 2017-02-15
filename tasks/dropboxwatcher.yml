@@ -1,0 +1,62 @@
+---
+- name: Création de l'utilisateur pour la seedbox
+  user:
+    name: "{{ seedbox_user }}"
+    state: present
+  tags:
+    - rtorrent
+    - dropboxwatcher
+
+- name: Installation des modules pythons pour dropbox
+  pip:
+    name: dropbox
+    state: latest
+  tags:
+    - dropboxwatcher
+
+- name: Mise en place du service dropboxwatcher
+  template:
+    src: dropboxwatcher.service.j2
+    dest: /etc/systemd/system/dropboxwatcher.service
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart seedbox services
+  tags:
+    - dropboxwatcher
+
+- name: Mise en place du fichier de configuration dropboxwatcher
+  template:
+    src: dropboxwatcher.cfg.j2
+    dest: "/home/{{ seedbox_user }}/dropboxwatcher.cfg"
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    mode: 0644
+  notify:
+    - restart seedbox services
+  tags:
+    - dropboxwatcher
+
+- name: Mise en place du script dropboxwatcher
+  copy:
+    src: dropboxwatcher.py
+    dest: "/home/{{ seedbox_user }}/"
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    mode: 0755
+  notify:
+    - restart seedbox services
+  tags:
+    - dropboxwatcher
+
+- name: Création du dossier de watch
+  file:
+    path: "{{ seedbox_watch_folder_path }}"
+    state: directory
+    recurse: yes
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    mode: 0755
+  tags:
+    - dropboxwatcher

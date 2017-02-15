@@ -1,0 +1,22 @@
+---
+- name: Mise en place du service openvpn
+  copy:
+    src: openvpn@.service
+    dest: /etc/systemd/system/
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - restart seedbox services
+  tags:
+    - openvpn
+
+- name: Copie des fichiers openvpn
+  copy:
+    src: "{{ seedbox_openvpn_configs_dir }}"
+    dest: /etc/
+  notify:
+    - restart seedbox services
+  tags:
+    - openvpn
+    - test

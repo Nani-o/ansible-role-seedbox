@@ -1,0 +1,10 @@
+---
+# handlers file for seedbox
+- name: restart seedbox services
+  shell: /home/rtorrent/rtorrent_launcher/rtorrentCheck.sh
+
+- name: restart crond service
+  service:
+    name: crond
+    state: restarted
+    enabled: yes

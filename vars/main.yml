@@ -1,0 +1,20 @@
+---
+# vars file for seedbox
+seedbox_user: rtorrent
+seedbox_pkgs:
+  - rtorrent
+  - openvpn
+  - screen
+  - crontabs
+  - sudo
+  - python-pip
+
+seedbox_download_folder: /home/rtorrent/Downloads
+seedbox_watch_folder_path: /home/rtorrent/Torrents
+
+seedbox_watch_folders:
+  - Test
+  - Test2
+
+seedbox_extensions_to_watch:
+  - .torrent

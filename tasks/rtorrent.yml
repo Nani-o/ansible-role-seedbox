@@ -1,0 +1,81 @@
+---
+- name: Mise en place du service rtorrent
+  template:
+    src: rtorrent@.service.j2
+    dest: /etc/systemd/system/rtorrent@.service
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - rtorrent
+
+- name: Mise en place du fichier de configuration rtorrent
+  template:
+    src: rtorrent.rc.j2
+    dest: "/home/{{ seedbox_user }}/.rtorrent.rc"
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    mode: 0644
+  notify:
+    - restart seedbox services
+  tags:
+    - rtorrent
+
+- name: Création du dossier de téléchargement
+  file:
+    path: "{{ seedbox_download_folder }}/{{ item }}"
+    state: directory
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    recurse: yes
+    mode: 0755
+  with_items:
+    - complete
+    - incomplete
+  tags:
+    - rtorrent
+
+- name: Mise en place du script de démarrage
+  copy:
+    src: rtorrent.sh
+    dest: "/home/{{ seedbox_user }}/"
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    mode: 0755
+  notify:
+    - restart seedbox services
+  tags:
+    - rtorrent
+
+- name: Mise en place du script de relance automatique
+  copy:
+    src: rtorrentCheck.sh
+    dest: "/home/{{ seedbox_user }}/"
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    mode: 0755
+  tags:
+    - rtorrent
+
+- name: Mise en place d'un cron pour la relance automatique
+  cron:
+    job: "/home/{{ seedbox_user }}/rtorrentCheck.sh"
+    name: "Check that rtorrent binding to vpn is correct"
+    user: "{{ seedbox_user }}"
+  notify:
+    - restart crond service
+  tags:
+    - rtorrent
+
+- name: Mise en place d'une autorisation de relancer le service
+  lineinfile:
+    dest: "/etc/sudoers"
+    regexp: "^rtorrent"
+    line: "rtorrent ALL= NOPASSWD: /bin/systemctl * rtorrent*"
+    state: present
+    owner: root
+    group: root
+    mode: 0440
+    validate: "/usr/sbin/visudo -cf %s"
+  tags:
+    - rtorrent

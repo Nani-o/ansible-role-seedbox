@@ -1,0 +1,20 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=rtorrent Service
+After=network.target
+Wants=openvpn@%i.service
+After=openvpn@%i.service
+BindsTo=openvpn@%i.service
+Wants=dropboxwatcher.service
+After=dropboxwatcher.service
+BindsTo=dropboxwatcher.service
+
+[Service]
+Type=forking
+User={{ seedbox_user }}
+ExecStart=/home/{{ seedbox_user }}/rtorrent.sh start
+ExecStop=/home/{{ seedbox_user }}/rtorrent.sh stop
+
+[Install]
+WantedBy=multi-user.target
