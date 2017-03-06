@@ -13,8 +13,8 @@ BindsTo=dropboxwatcher.service
 [Service]
 Type=forking
 User={{ seedbox_user }}
-ExecStart=/home/{{ seedbox_user }}/rtorrent.sh start
-ExecStop=/home/{{ seedbox_user }}/rtorrent.sh stop
+ExecStart={{ seedbox_rtorrentlauncher_path }}/rtorrent.sh start
+ExecStop={{ seedbox_rtorrentlauncher_path }}/rtorrent.sh stop
 
 [Install]
 WantedBy=multi-user.target

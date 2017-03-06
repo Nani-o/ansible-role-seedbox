@@ -21,24 +21,46 @@
   tags:
     - rtorrent
 
-- name: Création du dossier de téléchargement
+- name: Création du dossier de téléchargement en cours
   file:
-    path: "{{ seedbox_download_folder }}/{{ item }}"
+    path: "{{ seedbox_download_folder }}/incomplete/"
     state: directory
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     recurse: yes
     mode: 0755
-  with_items:
-    - complete
-    - incomplete
   tags:
     - rtorrent
 
-- name: Mise en place du script de démarrage
+- name: Création des dossiers de téléchargements finaux
+  file:
+    path: "{{ seedbox_download_folder }}/{{ item[0] }}/{{ item[1] }}/"
+    state: directory
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    recurse: yes
+    mode: 0755
+  with_nested:
+    - complete
+    - "{{ seedbox_watch_folders }}"
+  tags:
+    - rtorrent
+
+- name: Création du dossier du script de démarrage rtorrent
+  file:
+    path: "{{ seedbox_rtorrentlauncher_path }}"
+    state: directory
+    owner: "{{ seedbox_user }}"
+    group: "{{ seedbox_user }}"
+    recurse: yes
+    mode: 0755
+  tags:
+    - rtorrent
+
+- name: Copie du script de démarrage de démarrage rtorrent
   copy:
     src: rtorrent.sh
-    dest: "/home/{{ seedbox_user }}/"
+    dest: "{{ seedbox_rtorrentlauncher_path }}"
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
@@ -47,10 +69,10 @@
   tags:
     - rtorrent
 
-- name: Mise en place du script de relance automatique
+- name: Copie du script de relance automatique
   copy:
     src: rtorrentCheck.sh
-    dest: "/home/{{ seedbox_user }}/"
+    dest: "{{ seedbox_rtorrentlauncher_path }}"
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
@@ -59,7 +81,7 @@
 
 - name: Mise en place d'un cron pour la relance automatique
   cron:
-    job: "/home/{{ seedbox_user }}/rtorrentCheck.sh"
+    job: "{{ seedbox_rtorrentlauncher_path }}/rtorrentCheck.sh"
     name: "Check that rtorrent binding to vpn is correct"
     user: "{{ seedbox_user }}"
   notify:
