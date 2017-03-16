@@ -27,7 +27,6 @@
     state: directory
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
-    recurse: yes
     mode: 0755
   tags:
     - rtorrent
@@ -38,7 +37,6 @@
     state: directory
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
-    recurse: yes
     mode: 0755
   with_nested:
     - complete
@@ -52,7 +50,6 @@
     state: directory
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
-    recurse: yes
     mode: 0755
   tags:
     - rtorrent
