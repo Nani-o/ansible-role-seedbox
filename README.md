@@ -1,7 +1,9 @@
+[![Build Status](https://travis-ci.org/Nani-o/ansible-role-seedbox.svg?branch=master)](https://travis-ci.org/Nani-o/ansible-role-seedbox)
+
 seedbox
 =======
 
-This role install a custom seedbox.
+This role installs a custom seedbox.
 Torrents are downloaded via rtorrent which run in a screen, torrents file are uploaded using Dropbox and finally openvpn can be used to download.
 
 Requirements
