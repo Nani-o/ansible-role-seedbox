@@ -1,8 +1,8 @@
 ---
 - name: Mise en place du service openvpn
-  copy:
-    src: openvpn@.service
-    dest: /etc/systemd/system/
+  template:
+    src: openvpn@.service.j2
+    dest: /etc/systemd/system/openvpn@.service
     owner: root
     group: root
     mode: 0644
