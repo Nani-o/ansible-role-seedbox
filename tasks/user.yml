@@ -1,0 +1,9 @@
+---
+- name: Création de l'utilisateur pour la seedbox
+  user:
+    name: "{{ seedbox_user }}"
+    state: present
+  tags:
+    - rtorrent
+    - openvpn
+    - dropboxwatcher    

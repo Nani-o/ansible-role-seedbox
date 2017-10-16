@@ -3,13 +3,17 @@
 
 - include: packages.yml
 
-# Installation du service rtorrent
+# Création de l'utilisateur seedbox
 
-- include: rtorrent.yml
+- include: user.yml
 
 # Installation du vpn
 
 - include: openvpn.yml
+
+# Installation du service rtorrent
+
+- include: rtorrent.yml
 
 # Installation du service dropboxwatcher
 

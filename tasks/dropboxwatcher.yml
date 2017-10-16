@@ -1,12 +1,4 @@
 ---
-- name: Création de l'utilisateur pour la seedbox
-  user:
-    name: "{{ seedbox_user }}"
-    state: present
-  tags:
-    - rtorrent
-    - dropboxwatcher
-
 - name: Installation des modules pythons pour dropbox
   pip:
     name: dropbox
