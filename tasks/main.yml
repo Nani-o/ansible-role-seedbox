@@ -3,6 +3,10 @@
 
 - include: packages.yml
 
+# Installation du service rtorrent
+
+- include: rtorrent.yml
+
 # Installation du vpn
 
 - include: openvpn.yml
@@ -10,7 +14,3 @@
 # Installation du service dropboxwatcher
 
 - include: dropboxwatcher.yml
-
-# Installation du service rtorrent
-
-- include: rtorrent.yml

@@ -68,8 +68,8 @@
 
 - name: Copie du script de relance automatique
   template:
-    src: rtorrentCheck.sh
-    dest: "{{ seedbox_rtorrentlauncher_path }}"
+    src: rtorrentCheck.sh.j2
+    dest: "{{ seedbox_rtorrentlauncher_path }}/rtorrentCheck.sh"
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
