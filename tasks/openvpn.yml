@@ -14,7 +14,7 @@
 - name: Copie des fichiers openvpn
   copy:
     src: "{{ seedbox_openvpn_configs_dir }}"
-    dest: /etc/
+    dest: "/home/{{ seedbox_user }}/openvpn"
   notify:
     - restart seedbox services
   tags:

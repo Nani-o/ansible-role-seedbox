@@ -67,7 +67,7 @@
     - rtorrent
 
 - name: Copie du script de relance automatique
-  copy:
+  template:
     src: rtorrentCheck.sh
     dest: "{{ seedbox_rtorrentlauncher_path }}"
     owner: "{{ seedbox_user }}"

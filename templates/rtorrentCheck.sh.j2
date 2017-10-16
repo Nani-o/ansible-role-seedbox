@@ -11,7 +11,7 @@ fi
 if [[ "$RETURN_CODE" -ne 0 || "$VPN_IP" != "$RTORRENT_IP" ]]
 then
 	sudo systemctl stop rtorrent*
-        RANDOM_CONF=$(basename $(ls /etc/openvpn/*.conf | sort -R | tail -1) .conf)
+        RANDOM_CONF=$(basename $(ls /home/{{ seedbox_user }}/openvpn/*.conf | sort -R | tail -1) .conf)
         sudo systemctl start rtorrent@${RANDOM_CONF}
         echo "Restarted"
 else
