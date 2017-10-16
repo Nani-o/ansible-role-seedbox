@@ -1,2 +1,14 @@
 ---
 # defaults file for seedbox
+seedbox_user: rtorrent
+seedbox_download_folder: /home/rtorrent/downloads
+seedbox_watch_folder_path: /home/rtorrent/torrents
+
+seedbox_watch_folders:
+  - Torrents
+
+seedbox_extensions_to_watch:
+  - .torrent
+
+seedbox_dropboxwatcher_path: /home/rtorrent/dropboxwatcher
+seedbox_rtorrentlauncher_path: /home/rtorrent/rtorrent_launcher
