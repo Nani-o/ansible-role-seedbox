@@ -7,7 +7,7 @@
     group: root
     mode: 0644
   notify:
-    - restart seedbox services
+    - systemd daemon-reload
   tags:
     - openvpn
 
@@ -16,7 +16,7 @@
     src: "{{ seedbox_openvpn_configs_dir }}"
     dest: "/etc/openvpn/{{ seedbox_user }}"
   notify:
-    - restart seedbox services
+    - restart rtorrent
   tags:
     - openvpn
 
