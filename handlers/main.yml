@@ -1,7 +1,16 @@
 ---
 # handlers file for seedbox
-- name: restart seedbox services
-  shell: /home/rtorrent/rtorrent_launcher/rtorrentCheck.sh
+- name: systemd daemon-reload
+  systemd:
+    daemon_reload: yes
+
+- name: restart dropboxwatcher
+  systemd:
+    name: dropboxwatcher
+    state: restarted
+
+- name: restart rtorrent
+  shell: "{{ seedbox_rtorrentlauncher_path }}/rtorrentCheck.sh restart"
 
 - name: restart crond service
   service:

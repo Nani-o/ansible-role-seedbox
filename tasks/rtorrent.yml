@@ -6,6 +6,8 @@
     owner: root
     group: root
     mode: 0644
+  notify:
+    - systemd daemon-reload
   tags:
     - rtorrent
 
@@ -17,7 +19,7 @@
     group: "{{ seedbox_user }}"
     mode: 0644
   notify:
-    - restart seedbox services
+    - restart rtorrent
   tags:
     - rtorrent
 
@@ -62,7 +64,7 @@
     group: "{{ seedbox_user }}"
     mode: 0755
   notify:
-    - restart seedbox services
+    - restart rtorrent
   tags:
     - rtorrent
 
@@ -73,6 +75,8 @@
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
+  notify:
+    - restart rtorrent
   tags:
     - rtorrent
 

@@ -14,7 +14,8 @@
     group: root
     mode: 0644
   notify:
-    - restart seedbox services
+    - systemd daemon-reload
+    - restart dropboxwatcher
   tags:
     - dropboxwatcher
 
@@ -25,6 +26,8 @@
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
+  notify:
+    - restart dropboxwatcher
   tags:
     - dropboxwatcher
 
@@ -36,7 +39,7 @@
     group: "{{ seedbox_user }}"
     mode: 0644
   notify:
-    - restart seedbox services
+    - restart dropboxwatcher
   tags:
     - dropboxwatcher
 
@@ -48,7 +51,7 @@
     group: "{{ seedbox_user }}"
     mode: 0755
   notify:
-    - restart seedbox services
+    - restart dropboxwatcher
   tags:
     - dropboxwatcher
 
@@ -59,5 +62,7 @@
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
+  notify:
+    - restart dropboxwatcher
   tags:
     - dropboxwatcher
