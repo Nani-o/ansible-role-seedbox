@@ -7,3 +7,16 @@
     - rtorrent
     - openvpn
     - dropboxwatcher    
+
+- name: Mise en place des droits sudo pour la relance du service
+  lineinfile:
+    dest: "/etc/sudoers"
+    regexp: "^rtorrent"
+    line: "rtorrent ALL= NOPASSWD: /bin/systemctl * rtorrent*"
+    state: present
+    owner: root
+    group: root
+    mode: 0440
+    validate: "/usr/sbin/visudo -cf %s"
+  tags:
+    - rtorrent
