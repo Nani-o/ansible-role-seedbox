@@ -14,7 +14,3 @@
 # Installation du service rtorrent
 
 - include: rtorrent.yml
-
-# Installation du service dropboxwatcher
-
-- include: dropboxwatcher.yml
