@@ -1,5 +1,7 @@
 directory = {{ seedbox_download_folder }}/incomplete
 
+session = {{ seedbox_session_folder_path }}
+
 # Remove the torrent file upon completion. This unties it.
 # system.method.set_key = event.download.finished,remove_torrent,"execute=rm,$d.get_tied_to_file="
 
@@ -21,7 +23,7 @@ max_peers_seed = 50
 max_uploads = 10
 
 # Maximum number of simultaneous downloads
-max_downloads_global = 10
+max_downloads_global = 5
 # Maximum number of simultaneous uploads
 max_uploads_global = 20
 
