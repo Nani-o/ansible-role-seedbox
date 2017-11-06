@@ -1,8 +1,9 @@
 ---
 # defaults file for seedbox
 seedbox_user: rtorrent
-seedbox_download_folder: /home/rtorrent/downloads
-seedbox_watch_folder_path: /home/rtorrent/torrents
+seedbox_download_folder: "/home/{{ seedbox_user }}/downloads"
+seedbox_watch_folder_path: "/home/{{ seedbox_user }}/torrents"
+seedbox_session_folder_path: "/home/{{ seedbox_user }}/session"
 
 seedbox_watch_folders:
   - Torrents

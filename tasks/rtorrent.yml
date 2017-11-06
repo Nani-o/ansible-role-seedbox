@@ -23,36 +23,18 @@
   tags:
     - rtorrent
 
-- name: Création du dossier de téléchargement en cours
+- name: Création des dossiers
   file:
-    path: "{{ seedbox_download_folder }}/incomplete/"
+    path: "{{ item }}"
     state: directory
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
-  tags:
-    - rtorrent
-
-- name: Création des dossiers de téléchargements finaux
-  file:
-    path: "{{ seedbox_download_folder }}/{{ item[0] }}/{{ item[1] }}/"
-    state: directory
-    owner: "{{ seedbox_user }}"
-    group: "{{ seedbox_user }}"
-    mode: 0755
-  with_nested:
-    - complete
-    - "{{ seedbox_watch_folders }}"
-  tags:
-    - rtorrent
-
-- name: Création du dossier du script de démarrage rtorrent
-  file:
-    path: "{{ seedbox_rtorrentlauncher_path }}"
-    state: directory
-    owner: "{{ seedbox_user }}"
-    group: "{{ seedbox_user }}"
-    mode: 0755
+  with_items:
+    - "{{ seedbox_rtorrentlauncher_path }}"
+    - "{{ seedbox_download_folder }}/incomplete/"
+    - "{{ seedbox_watch_folders | map('regex_replace', '(.*)', seedbox_download_folder + '/complete/\\1') | list }}"
+    - "{{ seedbox_session_folder_path }}"
   tags:
     - rtorrent
 
