@@ -1,20 +1,35 @@
 #!/bin/bash
 
-/usr/sbin/ip addr show tun0 > /dev/null
-RETURN_CODE="$?"
+check_vpn()
+{
+  /usr/sbin/ip addr show tun0 > /dev/null
+  RETURN_CODE="$?"
 
-if [[ "$RETURN_CODE" -eq 0 ]]
-then
+  if [[ "$RETURN_CODE" -eq 0 ]]
+  then
     VPN_IP=$(/usr/sbin/ip addr show tun0 | grep inet | awk '{print $2}' | cut -d '/' -f1)
     RTORRENT_IP=$(/usr/bin/ps -ef | sed 's/.*[0-9][0-9]\:[0-9][0-9]\ //g' | grep '^rtorrent' | awk '{print $NF}')
-fi
+  fi
 
-if [[ "$RETURN_CODE" -ne 0 || "$VPN_IP" != "$RTORRENT_IP" || "$1" == "restart" ]]
+  [[ "$RETURN_CODE" -ne 0 || "$VPN_IP" != "$RTORRENT_IP" ]] && echo "true" || echo "false"
+}
+
+restart_services()
+{
+  [[ "$#" -ne 0 ]] && VPN_LOCATION="$1" || VPN_LOCATION="$(basename $(ls /etc/openvpn/{{ seedbox_user }}/*.conf | sort -R | tail -1) .conf)"
+  sudo systemctl stop "rtorrent*"
+  sudo systemctl start "rtorrent@${VPN_LOCATION}"
+  echo "Restarted"
+}
+
+
+if [[ "$1" == "restart" ]]
 then
-	sudo systemctl stop "rtorrent*"
-   RANDOM_CONF=$(basename $(ls /etc/openvpn/{{ seedbox_user }}/*.conf | sort -R | tail -1) .conf)
-   sudo systemctl start rtorrent@${RANDOM_CONF}
-   echo "Restarted"
+  [[ -z "$2" ]] && restart_services || restart_services "$2"
+elif [[ "$(check_vpn)" == "true" ]]
+then
+  restart_services
 else
 	echo "Nothing to do"
 fi
+
