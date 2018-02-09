@@ -23,6 +23,18 @@
   tags:
     - rtorrent
 
+- name: Suppression des bindings screen interférant avec rtorrent
+  lineinfile:
+    line: "stty {{ item }} undef"
+    path: "/home/{{ seedbox_user }}/.bashrc"
+  with_items:
+    - "start"
+    - "stop"
+  notify:
+    - restart rtorrent
+  tags:
+    - rtorrent
+
 - name: Création des dossiers
   file:
     path: "{{ item }}"
