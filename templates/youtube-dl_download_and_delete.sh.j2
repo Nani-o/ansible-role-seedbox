@@ -4,7 +4,8 @@ watch_folder="{{ seedbox_watch_folder_path + '/Youtube-dl' }}"
 
 files=(${watch_folder}/*)
 
-if [[ ${#files[@]} -gt 0 ]]
+if find "${watch_folder}" -mindepth 1 -print -quit | grep -q .
+then
     while read -r file
     do
         youtube-dl "$file" && rm -rf "$file"
