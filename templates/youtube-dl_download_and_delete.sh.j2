@@ -1,0 +1,12 @@
+#!/bin/bash
+
+watch_folder="{{ seedbox_watch_folder_path + '/Youtube-dl' }}"
+
+files=($watch_folder/*)
+
+if [[ ${#files[@]} -gt 0 ]]
+    while read -r file
+    do
+        youtube-dl "$file" && rm -rf "$file"
+    done <<< "$(ls ${watch_folder}/*)"
+fi
