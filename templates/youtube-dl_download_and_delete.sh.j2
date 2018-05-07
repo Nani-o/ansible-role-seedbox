@@ -1,6 +1,7 @@
 #!/bin/bash
 
 watch_folder="{{ seedbox_watch_folder_path + '/Youtube-dl' }}"
+download_folder="{{ seedbox_download_folder + '/complete/Youtube-dl' }}"
 
 files=(${watch_folder}/*)
 
@@ -8,6 +9,6 @@ if find "${watch_folder}" -mindepth 1 -print -quit | grep -q .
 then
     while read -r file
     do
-        youtube-dl "$file" && rm -rf "$file"
+        youtube-dl "$file" -o "${download_folder}/%(creator)s-%(title)s.%(ext)s" && rm -rf "$file"
     done <<< "$(ls ${watch_folder}/*)"
 fi
