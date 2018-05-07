@@ -1,20 +1,20 @@
 ---
 # Installation des packages requis
 
-- include: packages.yml
+- import_tasks: packages.yml
 
 # Création de l'utilisateur seedbox
 
-- include: user.yml
+- import_tasks: user.yml
 
 # Installation du vpn
 
-- include: openvpn.yml
+- import_tasks: openvpn.yml
 
 # Installation du service rtorrent
 
-- include: rtorrent.yml
+- import_tasks: rtorrent.yml
 
 # Installation du crontab pour youtube-dl
 
-- include: youtube-dl
+- import_tasks: youtube-dl.yml
