@@ -18,8 +18,8 @@
   with_items:
     - "{{ seedbox_scripts_path }}"
     - "{{ seedbox_download_folder }}/incomplete/"
-    - "{{ (seedbox_watch_folders + ["Youtube-dl"]) | map('regex_replace', '(.*)', seedbox_watch_folder_path + '/\\1') | list }}"
-    - "{{ (seedbox_watch_folders + ["Youtube-dl"]) | map('regex_replace', '(.*)', seedbox_download_folder + '/complete/\\1') | list }}"
+    - "{{ (seedbox_watch_folders + ['Youtube-dl']) | map('regex_replace', '(.*)', seedbox_watch_folder_path + '/\\1') | list }}"
+    - "{{ (seedbox_watch_folders + ['Youtube-dl']) | map('regex_replace', '(.*)', seedbox_download_folder + '/complete/\\1') | list }}"
     - "{{ seedbox_session_folder_path }}"
   tags:
     - rtorrent
