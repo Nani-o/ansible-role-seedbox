@@ -12,7 +12,7 @@
 - name: Mise en place d'un cron pour lancer le script youtube-dl
   cron:
     job: "{{ seedbox_scripts_path }}/youtube-dl_download_and_delete.sh"
-    name: "Check that rtorrent binding to vpn is correct"
+    name: "Check for files in youtube-dl watch folder and download them"
     user: "{{ seedbox_user }}"
     minute: "*/1"
   notify:
