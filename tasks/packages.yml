@@ -23,7 +23,7 @@
   pip:
     name: "{{ item }}"
     state: latest
-  with_items:
+  with_items: "{{ seedbox_pip_pkgs }}"
   tags:
     - pkgs
     - youtube_dl
