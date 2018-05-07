@@ -14,3 +14,7 @@
 # Installation du service rtorrent
 
 - include: rtorrent.yml
+
+# Installation du crontab pour youtube-dl
+
+- include: youtube-dl

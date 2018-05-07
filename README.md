@@ -4,7 +4,8 @@ seedbox
 =======
 
 This role installs a custom seedbox.
-Torrents are downloaded via rtorrent which run in a screen, torrents file are uploaded using Dropbox and finally openvpn can be used to download.
+It allow for torrents and youtube-dl watch folders.
+Torrents are downloaded via rtorrent which run in a screen, youtube-dl via a script in crontab.
 
 Requirements
 ------------

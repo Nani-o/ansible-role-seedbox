@@ -7,3 +7,6 @@ seedbox_pkgs:
   - crontabs
   - sudo
   - python-pip
+
+seedbox_pip_pkgs:
+  - youtube-dl

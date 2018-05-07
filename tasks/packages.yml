@@ -17,3 +17,13 @@
     - pkgs
     - openvpn
     - rtorrent
+    - youtube_dl
+
+- name: Installation des packages pip
+  pip:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+  tags:
+    - pkgs
+    - youtube_dl

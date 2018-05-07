@@ -5,7 +5,7 @@
     daemon_reload: yes
 
 - name: restart rtorrent
-  shell: "{{ seedbox_rtorrentlauncher_path }}/rtorrentCheck.sh restart"
+  shell: "{{ seedbox_scripts_path }}/rtorrentCheck.sh restart"
 
 - name: restart crond service
   service:

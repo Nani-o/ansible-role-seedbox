@@ -35,25 +35,10 @@
   tags:
     - rtorrent
 
-- name: Création des dossiers
-  file:
-    path: "{{ item }}"
-    state: directory
-    owner: "{{ seedbox_user }}"
-    group: "{{ seedbox_user }}"
-    mode: 0755
-  with_items:
-    - "{{ seedbox_rtorrentlauncher_path }}"
-    - "{{ seedbox_download_folder }}/incomplete/"
-    - "{{ seedbox_watch_folders | map('regex_replace', '(.*)', seedbox_download_folder + '/complete/\\1') | list }}"
-    - "{{ seedbox_session_folder_path }}"
-  tags:
-    - rtorrent
-
 - name: Copie du script de démarrage de démarrage rtorrent
   copy:
     src: rtorrent.sh
-    dest: "{{ seedbox_rtorrentlauncher_path }}"
+    dest: "{{ seedbox_scripts_path }}"
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
@@ -65,7 +50,7 @@
 - name: Copie du script de relance automatique
   template:
     src: rtorrentCheck.sh.j2
-    dest: "{{ seedbox_rtorrentlauncher_path }}/rtorrentCheck.sh"
+    dest: "{{ seedbox_scripts_path }}/rtorrentCheck.sh"
     owner: "{{ seedbox_user }}"
     group: "{{ seedbox_user }}"
     mode: 0755
@@ -76,7 +61,7 @@
 
 - name: Mise en place d'un cron pour la relance automatique
   cron:
-    job: "{{ seedbox_rtorrentlauncher_path }}/rtorrentCheck.sh"
+    job: "{{ seedbox_scripts_path }}/rtorrentCheck.sh"
     name: "Check that rtorrent binding to vpn is correct"
     user: "{{ seedbox_user }}"
   notify:

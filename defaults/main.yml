@@ -6,10 +6,12 @@ seedbox_watch_folder_path: "/home/{{ seedbox_user }}/torrents"
 seedbox_session_folder_path: "/home/{{ seedbox_user }}/session"
 
 seedbox_watch_folders:
-  - Torrents
+  - Animes
+  - Movies
+  - Shows
+  - Others
 
 seedbox_extensions_to_watch:
   - .torrent
 
-seedbox_dropboxwatcher_path: /home/rtorrent/dropboxwatcher
-seedbox_rtorrentlauncher_path: /home/rtorrent/rtorrent_launcher
+seedbox_scripts_path: "/home/{{ seedbox_user }}/scripts"
