@@ -27,6 +27,7 @@
   lineinfile:
     line: "stty {{ item }} undef"
     path: "/home/{{ seedbox_user }}/.bashrc"
+    create: yes
   with_items:
     - "start"
     - "stop"
