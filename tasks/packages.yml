@@ -10,9 +10,8 @@
 
 - name: Installation des packages requis
   yum:
-    name: "{{ item }}"
+    name: "{{ seedbox_pkgs }}"
     state: latest
-  with_items: "{{ seedbox_pkgs }}"
   tags:
     - pkgs
     - openvpn
@@ -21,9 +20,8 @@
 
 - name: Installation des packages pip
   pip:
-    name: "{{ item }}"
+    name: "{{ seedbox_pip_pkgs }}"
     state: latest
-  with_items: "{{ seedbox_pip_pkgs }}"
   tags:
     - pkgs
     - youtube_dl
