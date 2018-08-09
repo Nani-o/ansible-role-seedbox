@@ -7,7 +7,7 @@ check_vpn()
 
   if [[ "$RETURN_CODE" -eq 0 ]]
   then
-    VPN_IP=$(/usr/sbin/ip addr show tun0 | grep inet | awk '{print $2}' | cut -d '/' -f1)
+    VPN_IP=$(/usr/sbin/ip addr show tun0 | grep 'inet ' | awk '{print $2}' | cut -d '/' -f1)
     RTORRENT_IP=$(/usr/bin/ps -ef | sed 's/.*[0-9][0-9]\:[0-9][0-9]\ //g' | grep '^rtorrent' | awk '{print $NF}')
   fi
 

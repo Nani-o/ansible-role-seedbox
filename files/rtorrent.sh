@@ -9,7 +9,7 @@ if [[ "$1" == "start" ]]; then
     for ((i = 0; i < 30; i++))
     do
         sleep 1
-        VPN_IP=$(ip addr show tun0 | grep inet | awk '{print $2}' | sed 's/\/.*//g')
+        VPN_IP=$(ip addr show tun0 | grep 'inet ' | awk '{print $2}' | sed 's/\/.*//g')
         if [[ "$VPN_IP" != "" ]]
         then
             /usr/bin/screen -dmS rtorrent rtorrent -b "$VPN_IP"
