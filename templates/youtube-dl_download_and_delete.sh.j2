@@ -9,6 +9,6 @@ if find "${watch_folder}" -mindepth 1 -print -quit | grep -q .
 then
     while read -r file
     do
-        youtube-dl "$(cat "$file")" -o "${download_folder}/%(uploader)s-%(title)s.%(ext)s" && rm -rf "$file"
+        grep "https://youtu*be/" ${file} | xargs -L 1 -I {} youtube-dl {} -o "${download_folder}/%(uploader)s-%(title)s.%(ext)s" && rm -rf "${file}"
     done <<< "$(ls ${watch_folder}/*)"
 fi
