@@ -29,8 +29,8 @@
     path: "/home/{{ seedbox_user }}/.bashrc"
     create: yes
   with_items:
-    - "start"
     - "stop"
+    - "start"
   notify:
     - restart rtorrent
   tags:
