@@ -1,12 +1,4 @@
 ---
-# vars file for seedbox
-seedbox_pkgs:
-  - rtorrent
-  - openvpn
-  - screen
-  - crontabs
-  - sudo
-  - python-pip
-
 seedbox_pip_pkgs:
   - youtube-dl
+...
