@@ -1,0 +1,10 @@
+---
+# vars file for seedbox
+seedbox_pkgs:
+  - rtorrent
+  - openvpn
+  - screen
+  - cron
+  - sudo
+  - python-pip
+...
