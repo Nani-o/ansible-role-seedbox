@@ -1,0 +1,18 @@
+---
+- name: Installation des packages requis
+  apt:
+    name: "{{ seedbox_pkgs }}"
+    state: latest
+  tags:
+    - pkgs
+    - openvpn
+    - rtorrent
+    - youtube_dl
+
+- name: Installation des packages pip
+  pip:
+    name: "{{ seedbox_pip_pkgs }}"
+    state: latest
+  tags:
+    - pkgs
+    - youtube_dl
