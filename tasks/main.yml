@@ -1,7 +1,7 @@
 ---
 # Installation des packages requis
 
-- import_tasks: "packages-{{ ansible_os_family }}.yml"
+- include_tasks: "packages-{{ ansible_os_family }}.yml"
 
 # Création de l'utilisateur seedbox
 
